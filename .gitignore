@@ -1,0 +1,10 @@
+# Firefox extension tooling artifacts
+web-ext-artifacts/
+*.xpi
+*.zip
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
