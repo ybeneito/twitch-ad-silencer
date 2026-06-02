@@ -39,6 +39,27 @@ onglets Twitch et conservé entre les sessions. Le content script réagit en
 direct : couper l'extension en pleine pub restaure aussitôt le son d'origine,
 la rallumer ré-applique le swap — sans recharger l'onglet.
 
+## Installer l'extension (signée, permanente)
+
+L'install permanente passe par une signature **unlisted** sur AMO (Mozilla) :
+canal privé, validation automatique en 1-2 min, pas de review humaine ni de
+listing public.
+
+1. Génère une clé API sur
+   <https://addons.mozilla.org/developers/addon/api/key/> (compte Firefox
+   requis). Tu obtiens un **JWT issuer** (`user:XXXXX:XX`) et un **secret**
+   affiché une seule fois.
+2. Depuis ce dossier, signe l'extension :
+   ```powershell
+   npx --yes web-ext sign --channel=unlisted --api-key="user:XXXXX:XX" --api-secret="TON_SECRET"
+   ```
+   Le `.xpi` signé atterrit dans `web-ext-artifacts/`.
+3. Dans Firefox : `about:addons` → roue crantée → **Installer un module depuis
+   un fichier** → choisis le `.xpi`. Il survit aux redémarrages.
+
+> Pour signer une nouvelle version, **incrémente `version` dans
+> `manifest.json`** au préalable — AMO refuse un numéro déjà signé.
+
 ## Charger l'extension (temporaire)
 
 1. Ouvre `about:debugging#/runtime/this-firefox`
