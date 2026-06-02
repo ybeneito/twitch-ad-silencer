@@ -12,8 +12,11 @@ Aucun PiP, aucun clic, aucune API privilégiée → pas de background script.
 > La pub n'est jamais bloquée ni skippée : elle se joue jusqu'au bout (mutée),
 > donc l'impression reste comptabilisée pour le streamer.
 
-Un **pre-roll** (pub avant le démarrage du stream) est hors de portée : il n'y a
-pas encore de preview à démuter. L'extension le détecte et ne fait rien.
+Le mécanisme s'active dès que Twitch affiche le preview du stream à côté de la
+pub — ce qui couvre les mid-rolls **et** beaucoup de pre-rolls (quand on rejoint
+un live déjà en cours, le contenu existe et Twitch montre le preview). Le seul
+cas non couvert : une pub **sans aucun preview** (rien à afficher en parallèle),
+où l'extension détecte la pub et ne fait rien.
 
 ## Structure
 
