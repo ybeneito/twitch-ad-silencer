@@ -37,6 +37,7 @@
     isActive: false,
     previewVideo: null,
     savedPreviewMuted: true,
+    savedPreviewVolume: 1,
     adVideo: null,
     savedAdMuted: false,
     adDetected: false,
@@ -82,15 +83,27 @@
     return others.sort((a, b) => renderedArea(b) - renderedArea(a))[0];
   };
 
-  const unmutePreview = (video) => {
+  // Match the preview's loudness to the level the user was listening at on the
+  // main player, so a low-volume stream does not blast back at full volume when
+  // the ad swap kicks in. `targetVolume` is the main player's volume read before
+  // it gets muted; ignored when absent or zero.
+  const unmutePreview = (video, targetVolume) => {
     state.savedPreviewMuted = video.muted;
+    state.savedPreviewVolume = video.volume;
     video.muted = false;
-    if (video.volume === 0) video.volume = 1;
+    if (typeof targetVolume === "number" && targetVolume > 0) {
+      video.volume = targetVolume;
+    } else if (video.volume === 0) {
+      video.volume = 1;
+    }
     state.previewVideo = video;
   };
 
   const restorePreview = (video) => {
-    if (video?.isConnected) video.muted = state.savedPreviewMuted;
+    if (video?.isConnected) {
+      video.muted = state.savedPreviewMuted;
+      video.volume = state.savedPreviewVolume;
+    }
   };
 
   const muteAd = () => {
@@ -117,7 +130,12 @@
       }
       return;
     }
-    unmutePreview(video);
+    // Read the main player's volume before muting it, to mirror it on the
+    // preview (findAdVideo runs again inside muteAd once previewVideo is set).
+    const adVideo = findAdVideo();
+    const targetVolume =
+      adVideo && adVideo !== video ? adVideo.volume : undefined;
+    unmutePreview(video, targetVolume);
     state.isActive = true;
     state.noPreviewLogged = false;
     muteAd();
