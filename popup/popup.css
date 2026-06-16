@@ -53,13 +53,6 @@ body {
   color: var(--muted);
 }
 
-.hint {
-  margin-top: 12px;
-  font-size: 11px;
-  line-height: 1.4;
-  color: var(--muted);
-}
-
 /* Toggle switch */
 .switch {
   position: relative;

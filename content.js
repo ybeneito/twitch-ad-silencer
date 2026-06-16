@@ -1,4 +1,4 @@
-// Twitch Ad Stream Keeper - content script
+// Twitch Ad Silencer - content script
 //
 // During a Twitch ad break, Twitch keeps the live stream playing in a small,
 // muted preview <video> (top-right of the page) while the main player shows the
@@ -14,7 +14,7 @@
 (() => {
   "use strict";
 
-  // Set to true to print diagnostics under the "[ad-stream-keeper]" prefix when
+  // Set to true to print diagnostics under the "[ad-silencer]" prefix when
   // recalibrating selectors against the live Twitch DOM.
   const DEBUG = false;
 
@@ -45,7 +45,7 @@
   };
 
   const log = (...args) => {
-    if (DEBUG) console.info("[ad-stream-keeper]", ...args);
+    if (DEBUG) console.info("[ad-silencer]", ...args);
   };
 
   const isAdPlaying = () =>

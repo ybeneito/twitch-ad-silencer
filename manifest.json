@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "Twitch Ad Stream Keeper",
-  "version": "1.1.0",
+  "name": "Twitch Ad Silencer",
+  "version": "1.2.0",
   "description": "During a Twitch ad break, unmutes the live stream preview and mutes the ad on the current tab, so only the stream audio is heard.",
   "browser_specific_settings": {
     "gecko": {
-      "id": "twitch-ad-stream-keeper@local",
+      "id": "twitch-ad-silencer@ybeneito",
       "strict_min_version": "121.0",
       "data_collection_permissions": {
         "required": ["none"]
@@ -18,7 +18,7 @@
     "96": "icons/icon.svg"
   },
   "action": {
-    "default_title": "Twitch Ad Stream Keeper",
+    "default_title": "Twitch Ad Silencer",
     "default_popup": "popup/popup.html",
     "default_icon": "icons/icon.svg"
   },

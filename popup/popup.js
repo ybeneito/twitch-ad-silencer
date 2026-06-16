@@ -3,7 +3,7 @@ const status = document.getElementById("status");
 
 const render = (enabled) => {
   toggle.checked = enabled;
-  status.textContent = enabled ? "Activé" : "Désactivé";
+  status.textContent = enabled ? "On" : "Off";
   status.classList.toggle("off", !enabled);
 };
 
